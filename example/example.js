@@ -18,14 +18,23 @@
   // Filter according to enrollment that is greater than this variable:
   var minEnrollment = 300;
 
+  // ideas for writing functions to replace logic and loops:
+  // var cleanData(school){
+  //   return cleanSchool;
+  // }
+  // var cleanData = cleanMyData();
+  // mapMyData(cleanData);
+//console.log(schools);
+
+
 
   // clean the data
-  for (var i = 0; i < schools.length - 1; i++) {
+  for (var i = 0; i < schools.length; i++) {
     // If we have '19104 - 1234', splitting and taking the first (0th) element
     // as an integer should yield a zip in the format above
     if (typeof schools[i].ZIPCODE === 'string') {
       var split = schools[i].ZIPCODE.split(' ');
-      var normalized_zip = parseInt(split[0]);
+      var normalized_zip = parseInt(split[0]);  // gets rid of last four digits of zip-code
       schools[i].ZIPCODE = normalized_zip;
     }
 
@@ -47,7 +56,7 @@
   // filter data
   var filtered_data = [];
   var filtered_out = [];
-  for (var i = 0; i < schools.length - 1; i++) {
+  for (var i = 0; i < schools.length; i++) {
     // These really should be predicates!
     isOpen = schools[i].ACTIVE.toUpperCase() == 'OPEN';
     isPublic = (schools[i].TYPE.toUpperCase() !== 'CHARTER' ||
